@@ -1,0 +1,6 @@
+kedro==0.18.1
+openai
+tenacity
+numpy
+python-dotenv
+rich

@@ -1,0 +1,168 @@
+open_ai_parameters_change:
+  model: text-davinci-003
+  prompt: Choose the best option according to the text
+  temperature: 0.7
+  max_tokens: 2000
+  top_p: 1
+  frequency_penalty: 0
+  presence_penalty: 0
+
+
+open_ai_tasks:
+  
+  bad_practices: |
+    MALAS PRACTICAS:
+      smell code.
+      codigo spaguetti.
+      Mala denominación de variables
+      comentarios inutiles
+      clases gordas
+      botón mágico
+      poltergeist
+      código sin indentación
+      código redundante
+      Hardcoding
+      código complicado
+      las demás que encuentres relevantes en el código
+  
+  security: |
+    eres un experto en seguridad informatica
+    menciona todos los problemas que veas en el código
+    sobre:
+      Inyección de código
+      Pérdida de autenticación y gestión de sesiones
+      Exposición de datos sensibles
+      Entidades externas XML (XXE)
+      Pérdida de control de acceso
+      Configuración de seguridad incorrecta
+      Cross-Site Scripting (XSS)
+      Deserialización insegura
+      Uso de componentes con vulnerabilidades conocidas
+      Registro y monitorización insuficientes
+      las demás que encuentres relevantes en el código
+
+      por ejemplo:
+    
+      [A]Mala práctica: dar una descripción
+       y luego mostrar el segmento del código con el error
+
+      [B]Sugerencia: dar 3 sugerencias y enlistalas (1. 2. 3.)
+      [C]mostrar el código re escrito aplicando las sugerencias mencionadas
+
+  best_practices: |
+    eres un experto en buenas prácticas de python
+    menciona cinco (5) malas prácticas en el código
+    de acuerdo al PEP, o errores por no aprovechar 
+    las caracteristicas de Python o no cumplir
+    las 20 reglas del Zen de Python: 
+      
+    responder con el siguiente esquema
+    
+    1. 
+    [E]Error: dar una descripción
+    [S]Sugerencia: dar un consejo o tip
+
+    2. ... hasta 5
+
+  improve: |
+    eres un experto en desarrollo con python mejora este código para:
+      
+      aprovechar las caracteristicas de Python
+      aplicar programación modular con pequeñas funciones reutilizables
+      Usar bucles y funciones para reducir la redundancia
+      reducir el número de líneas
+      quitar comentarios.
+      Utilizar una sintaxis más sencilla.
+      Utilizar mejor la lógica condicional para facilitar la lectura del código
+      Seguir la guía de estilo PEP 8
+      utiliza diccionarios siempre
+      Usar listas por comprensión en lugar de bucles for
+      Usar generadores en lugar de listas cuando se trabaja con secuencias muy grandes
+      Documentar el código con docstrings y especificando el tipo de retorno
+      manejar las excepciones con bloques try-except-finally
+      Utilizar funciones integradas de Python
+      aprovecha las caracteristicas de Python
+      usar estructura de datos
+      usar algoritmos adecuados
+      quitar cuellos de botella
+      quitar fugas de memoria
+
+  explain: |
+    Eres un profezor de Python avanzado con 50 años de experiencia
+    Explicame el código, que hace en cada una de sus líneas, por ejemplo
+    Línea 1 a 5: se usa una comprehension de listas para reducir las líneas.
+    también menciona cosas interesantes.
+
+  pytest: |
+    Escribir pruebas claras, concisas, independientes y aisladas, para cada una de las funcionalidades o escenarios
+    del código teniendo en cuenta:
+      usar el marco Pytest
+      importa Pytest
+      importa los metodos suponiendo que están en la raíz del proyecto
+      usar @pytest.mark.parametrize o subTest para parametrizar las pruebas y evitar la repetición de código.
+      Usar capsys o capfd para capturar la salida estándar y hacer afirmaciones sobre ella
+      Usar pytest.raises o assertRaises para probar las excepciones esperadas
+      Usar mock o monkeypatch para simular el comportamiento de otras funciones o clases que no se quieren probar directamente
+
+  ask_favor: |
+    crea un código en Python que:
+     
+  rebuild: |
+    teniendo en cuenta las malas prácticas encontradas y las sugerencias dadas:
+    
+    {{error}}
+    
+    cambiar el siguiente código por completo:
+      
+    {{code}}:
+
+
+  sherlock: |
+    eres Sherlock Homes y debes realizar un analisis forense
+    digital para estudiar este código y averiguar si tiene un fin malicioso
+    para saber si es malicioso vas a enlistar toda la información relevante, respondiendo
+    estas preguntas.
+      
+      
+    cuales son los puntos especificos sospechosos?
+    haz un análisis de: 
+          strings
+          los comentarios
+          buscar URL
+          las librerías
+          las funciones
+          las secciones
+          los recursos
+          los imports o los exports.
+    investigar cualquier cadena de texto relevante y extraer strings, comentarios, las cadenas ASCII o Unicode que se encuentran en el código.
+    explicar cuál es el objetivo del código
+    explicar por que el código es sospechoso, 
+    explicar que estrategias de codificación se usan.
+    explicar que se intenta ocultar
+    buscar patrones de uso
+    buscar errores o vulnerabilidades en el código
+    identificar cualquier actividad maliciosa
+    identificar cualquier actividad sospechosa
+    revisar la línea de código para ver si hay alguna variable global predeterminada
+    observar si hay algún método privado
+    buscar llamadas a métodos externos
+    buscar llamadas a métodos internos
+    buscar errores en el código
+    buscar vulnerabilidades en el código
+    identificar las librerías y explicar su uso en el código.
+    las demás que sean relevantes para el caso
+
+    presenta un informe super detallado y completo con las preguntas que tienen respuesta
+    y al final de acuerdo a lo investigado menciona varias HIPOTESIS del uso del código y la
+    ruta a seguir.
+
+  auditoria: |
+    eres un auditor y vas a revisar si el código (CODE):
+      sigue las convenciones PEP 8
+      la funcionalidad del código: si hace lo que se espera
+      la seguridad del código: si evita inyecciones, ejecuciones arbitrarías de código, datos sensibles
+      la eficencias del código: si aprovecha las caracteristicas de Python, si usa estructura de datos, algoritmos adecuados
+        si evita cuellos de botella o fugas de memoria
+
+      presenta un informe completo y detallado de las cosas que no se están cumpliendo, con el segmento 
+      del código (max 5 líneas) que tiene el error y un ejemplo del código correcto (max 5 líneas).

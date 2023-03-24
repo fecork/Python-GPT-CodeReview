@@ -1,0 +1,94 @@
+open_ai_parameters_change:
+  model: text-davinci-003
+  prompt: Choose the best option according to the text
+  temperature: 0.7
+  max_tokens: 2000
+  top_p: 1
+  frequency_penalty: 0
+  presence_penalty: 0
+
+
+open_ai_tasks:
+  
+  bad_practices: |
+    MALAS PRACTICAS:
+      smell code.
+      codigo spaguetti.
+      Mala denominación de variables
+      comentarios inutiles o falta de comentarios
+      clases gordas
+      botón mágico
+      poltergeist
+      código sin indentación
+      código redundante
+      Hardcoding
+      código complicado
+      las demás que encuentres relevantes en el código
+  
+  security: |
+    eres un experto en seguridad informatica
+    menciona todos los problemas que veas en el código
+    sobre:
+      Inyección de código
+      Pérdida de autenticación y gestión de sesiones
+      Exposición de datos sensibles
+      Entidades externas XML (XXE)
+      Pérdida de control de acceso
+      Configuración de seguridad incorrecta
+      Cross-Site Scripting (XSS)
+      Deserialización insegura
+      Uso de componentes con vulnerabilidades conocidas
+      Registro y monitorización insuficientes
+      las demás que encuentres relevantes en el código
+
+      por ejemplo:
+    
+      [A]Mala práctica: dar una descripción
+       y luego mostrar el segmento del código con el error
+
+      [B]Sugerencia: dar 3 sugerencias y enlistalas (1. 2. 3.)
+      [C]mostrar el código re escrito aplicando las sugerencias mencionadas
+
+  best_practices: |
+    eres un experto en buenas prácticas de python
+    menciona todas las malas prácticas en el código
+    de acuerdo al PEP y el Zen de python: 
+      
+    por ejemplo:
+    
+    [A]Mala práctica: dar una descripción
+       y luego mostrar el segmento del código con el error
+
+    [B]Sugerencia: dar 5 sugerencias y enlistalas (1. 2. 3.)
+    [C]mostrar el código re escrito aplicando las sugerencias mencionadas
+
+  improve: |
+    eres un experto en buenas prácticas de python
+    re escribe el código usando el Zen de Python
+    NOTA: 
+      que queden con pocas líneas
+      quita todas malas prácticas
+      no olvides documentar el código 
+      especificando el tipo de retorno
+
+  explain: |
+    Eres un profezor de Python avanzado con 50 años de experiencia
+    Explicame el código, que hace en cada una de sus líneas, también
+    menciona cosas interesantes.
+
+  pytest: |
+    Escribir pruebas claras, concisas, independientes y aisladas, para cada una de las funcionalidades o escenarios
+    del código teniendo en cuenta:
+      usar el marco Pytest
+      importa Pytest
+      importa los metodos suponiendo que están en la raíz del proyecto
+      usar @pytest.mark.parametrize o subTest para parametrizar las pruebas y evitar la repetición de código.
+      Usar capsys o capfd para capturar la salida estándar y hacer afirmaciones sobre ella
+      Usar pytest.raises o assertRaises para probar las excepciones esperadas
+      Usar mock o monkeypatch para simular el comportamiento de otras funciones o clases que no se quieren probar directamente
+
+  ask_favor: |
+    crea un código en Python que:
+     
+  rebuild: |
+    para el código {{code}}, {{error}}, re escribr el código:
