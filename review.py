@@ -32,8 +32,8 @@ gpt_response = adapter_azure_gpt.ask_openai(task_data["prompt"])
 
 response = gpt_response["text"]
 name = f"{task_data['nick']}{name}".replace(".py", "")
-
-save_code(f"{root_path}/{task_data['folder']}/{task}", name, response)
+save_path = f"{root_path}/{task_data['folder']}/{task}"
+save_code(save_path, name, response)
 console = console.Console()
 colores = ["orange3", "light_salmon3", "light_pink3", "pink3", "plum3"]
-console.print(response, style=colores[4])
+console.print(response, style=colores[1])

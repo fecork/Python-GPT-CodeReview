@@ -38,6 +38,12 @@ def build_prompt(code: str, error: str, new_code: str, tasks) -> dict:
             "prompt": f"{tasks['pytest']}:\n\n{code}",
             "create_file": True,
         },
+        "tdt": {
+            "nick": "test_",
+            "folder": "test",
+            "prompt": f"{tasks['tdt']}:\n\n{new_code}",
+            "create_file": True,
+        },
         "ask": {
             "nick": "example_",
             "folder": "review",

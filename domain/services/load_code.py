@@ -39,6 +39,7 @@ def make_folders(path: str) -> list:
     in case they do not exist.
     """
     logging.warning("Executing make_folders")
+    print(path)
     try:
         Path(path).mkdir(parents=True, exist_ok=True)
     except Exception as e:

@@ -168,3 +168,15 @@ open_ai_tasks:
 
       presenta un informe completo y detallado de las cosas que no se están cumpliendo, con el segmento 
       del código (max 5 líneas) que tiene el error y un ejemplo del código correcto (max 5 líneas).
+
+  tdt: |
+    eres experto en Test Driven Development, escribe el código de las pruebas
+    teniendo en cuenta:
+      usar el marco Pytest
+      importa Pytest
+      importa los metodos suponiendo que están en la raíz del proyecto
+      usar @pytest.mark.parametrize o subTest para parametrizar las pruebas y evitar la repetición de código.
+      Usar capsys o capfd para capturar la salida estándar y hacer afirmaciones sobre ella
+      Usar pytest.raises o assertRaises para probar las excepciones esperadas
+      Usar mock o monkeypatch para simular el comportamiento de otras funciones o clases que no se quieren probar directamente
+    para un código cuyo objetivo es:

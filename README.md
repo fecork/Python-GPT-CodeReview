@@ -1,4 +1,8 @@
-## 📌Python-GPT-CodeReview
+# 📌GPT-CodeReview-Python
+
+Este es un POC en construcción.
+
+Utilizando GPT, podemos realizar el análisis de un código para poder saber que buenas prácticas podemos aplicar, si estámos aplicando de manera corecta el PEP-8, para re escribir un código o mejorar el que tenemos.
 
 ## 🚀 Comenzando
 
@@ -38,6 +42,7 @@ Para configurar las variables de entorno en el archivo `.env`, sigue estos pasos
 4. Guarda el archivo `.env`.
 
 A continuación, se describen las variables de entorno utilizadas en el proyecto:
+para este caso usamos el servicio de GPT proporcionado por Microsoft Azure.
 
 - `AZOPENAIKEY`: Clave de API de OpenAI para acceder a la API de GPT.
 - `AZOPENAIENDPOINT`: Punto final de la API de OpenAI para acceder a la API de GPT.
@@ -48,7 +53,7 @@ A continuación, se describen las variables de entorno utilizadas en el proyecto
 Por ejemplo:
 
 ```
-AZOPENAIKEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+AZOPENAIKEY=XXXXXXXXXXXXXXXXXXXXX
 AZOPENAIENDPOINT=https://api.openai.com/v1
 AZOPENAITYPE=davinci
 
@@ -73,6 +78,184 @@ La opción `-t` se utiliza para seleccionar una tarea específica a realizar den
 - `explain`: Explica el código especificado en la opción `p`.
 - `pytest`: Genera las pruebas unitarias utilizando pytest en el código especificado en la opción `p`.
 - `audit`: Genera el reporte de auditoría en el código especificado en la opción `p`.
+- `tdt`: aplica tdt basado en una descripción y guarda las pruebas generadas en  `p`.
+
+### Ejemplos
+
+suponiendo que `p=RR`
+
+TDT de un código para limpiar carácteres especiales
+
+    python review.py -n "eliminar carácteres especiales de un string que no son UTF8" -p "../RR/" -t "tdt"
+
+salida:
+
+    import pytest
+    import re
+
+    def remove_non_utf8_chars(input_string):
+        #elimina caracteres especiales de un string que no son UTF8
+        return re.sub(r'[^\x00-\x7F]+','', input_string)
+
+    @pytest.mark.parametrize("input_string, expected_output", [
+        ("Hola! 🤗", "Hola!"),
+        ("¿Cómo estás? 🤔", "Cmo ests?"),
+        ("Muy bien, gracias 🙏", "Muy bien, gracias"),
+    ])
+    def test_remove_non_utf8_chars(input_string, expected_output, capsys):
+        # Comprueba que la función elimina los caracteres especiales
+        remove_non_utf8_chars(input_string)
+        out, err = capsys.readouterr()
+        assert out == expected_output
+
+    def test_remove_non_utf8_chars_type_error(monkeypatch):
+        # Comprueba que la función arroja un TypeError cuando el parámetro
+        # no es una cadena de caracteres
+        monkeypatch.setattr(remove_non_utf8_chars, "input_string", 123456)
+        with pytest.raises(TypeError):
+            remove_non_utf8_chars(input_string)
+
+___
+
+Pedir que codifique la función que detecta esdrujulas en un texto
+
+    python review.py -n "hacer una función en python aplicando buenas prácticas que detecte en un texto si hay palabras esdrujulas, retornarlas en una lista" -p "../RR/" -t "ask"
+
+salida:
+
+    def detectar_palabras_esdrujulas(texto):
+        resultado = []
+        palabras = texto.split()  # separa el texto en palabras
+
+        for palabra in palabras:
+            if palabra.endswith("í") or palabra.endswith("ó"):
+                resultado.append(palabra)
+
+        return resultado
+
+Revisar si hay malas prácticas en el código
+    
+    python review.py -p "../RR/example_.py" -t "best"
+
+salida:
+
+    1. [E]Error: Usar el método split() de cadenas sin especificar el argumento del caracter de separación. 
+    [S]Sugerencia: Utilizar el argumento del carácter de separación para mejorar la legibilidad del código.
+
+    2. [E]Error: El nombre de la variable resultado no es descriptivo.
+    [S]Sugerencia: Usar nombres más descriptivos para las variables como palabras_esdrujulas_encontradas.
+
+    3. [E]Error: Utilizar índices de iteración en lugar de iterar sobre los elementos de la lista.
+    [S]Sugerencia: Utilizar iteración directa sobre los elementos de la lista para simplificar el código.
+
+Rehacer el código basado en las sugerencias de buenas prácticas de la tarea "best"
+
+     python review.py -p "../RR/example_.py" -t "rebuild"
+
+salida:
+
+     def encontrar_palabras_esdrujulas(texto):
+        palabras_esdrujulas_encontradas = []
+
+        for palabra in texto.split():
+            if palabra.endswith(('í', 'ó')):
+            palabras_esdrujulas_encontradas.append(palabra)
+
+        return palabras_esdrujulas_encontradas
+___
+
+Mejorar el código de acuerdo al Zen de Python
+
+    python review.py -p "../RR/example_.py" -t "improve"
+
+salida:
+
+    def detectar_palabras_esdrujulas(texto: str) -> list:
+    """
+    Esta función detecta todas las palabras esdrújulas dentro de un
+    texto dado y devuelve una lista con ellas.
+    """
+    palabras = texto.split()  # separa el texto en palabras
+    return
+
+___
+
+Pedir explicación de lo que hace un código
+
+    python review.py -p "../RR/example_.py" -t "explain"
+
+salida:
+
+    Línea 1 a 5: Esta función recibe una cadena de texto como argumento y devuelve una lista con todas las palabras que terminen con "í" o "ó". Para hacer esto, primero usa una comprensión de listas para separar el texto en palabras individuales. Luego, usa un bucle for para recorrer cada palabra y comprobar si termina con "í" o "ó" usando el método de cadena ".endswith()". Si la palabra cumple esta condición, se agrega a la lista de resultados. Finalmente, la función devuelve la lista de palabras esdrújulas
+    encontradas.
+
+___
+
+Auditar un código
+
+    python review.py -p "../RR/example_.py" -t "auditoria"
+
+salida:
+
+    Error: El código no sigue las convenciones PEP 8.
+    Ejemplo de código correcto:
+
+    def detectar_palabras_esdrujulas(texto):
+        resultado = []
+        palabras = texto.split()  # separa el texto en palabras
+
+        for palabra in palabras:
+            if palabra.endswith("í") or palabra.endswith("ó"):
+                resultado.append(palabra)
+
+        return resultado
+
+___
+
+Revisar si hay vulnerabilidades o porblemas de seguridad
+
+    python review.py -p "../RR/example_.py" -t "security
+
+salida:
+
+    Problemática:
+    1. Inyección de código: el texto proporcionado por el usuario podría contener código malicioso que podría ser ejecutado por el programa.
+    2. Deserialización insegura: el texto proporcionado por el usuario podría contener información maliciosa en formato de serialización que podría ser ejecutada por el programa.
+    3. Uso de componentes con vulnerabilidades conocidas: si el programa está utilizando componentes con vulnerabilidades conocidas, es posible que los usuarios puedan explotar esas vulnerabilidades para obtener acceso no autorizado.
+
+    Sugerencia:
+    1. Utilizar una función de filtro para verificar si el texto proporcionado contiene caracteres no permitidos.
+    2. Utilizar una función de deserialización segura para verificar que el texto proporcionado no está en formato de serialización.
+    3. Asegurarse de que todos los componentes utilizados en el programa estén actualizados y no tengan vulnerabilidades conocidas.
+
+    Código reescrito:
+    def detectar_palabras_esdrujulas(texto):
+        resultado = []
+        palabras = filter(lambda x: not set('<>{}[]()=+-*/\|&^%$#@!`~').intersection(x), texto.split())  # filtra el texto para eliminar caracteres no permitidos
+
+        for palabra in palabras:
+            if palabra.endswith("í") or palabra.endswith("ó"):
+                resultado.append(palabra)
+
+        return resultado
+
+___
+
+Crear pruebas unitarias de un código
+
+    python review.py -p "../RR/example_.py" -t "pytest"
+
+salida:
+
+    @pytest.mark.parametrize("texto, esdrujulas", [
+        ("Hola mundo", []),
+        ("Hola trabají", ["trabají"]),
+        ("Tengó que trabajar", ["Tengó"]),
+        ("No me gusta leer", []),
+    ])
+    def test_detectar_palabras_esdrujulas(texto, esdrujulas):
+        assert detectar_palabras_esdrujulas(texto) == esdrujulas
+
 
 ## 🛠️ Construido con
 

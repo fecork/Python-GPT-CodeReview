@@ -18,6 +18,7 @@ class TaskManager:
             "explain": self.explain_code,
             "pytest": self.pytest_run,
             "auditoria": self.audit_report,
+            "tdt": self.create_code,
         }
 
         if task in tasks:
@@ -49,6 +50,9 @@ class TaskManager:
     def audit_report(self):
         print(f"genera el reporte de auditoria en {self.path}")
 
+    def tdt(self, new):
+        print(f"aplicando TDT para: {new}")
+
 
 def get_args() -> argparse.Namespace:
     """Get arguments from terminal"""
@@ -66,6 +70,7 @@ def get_args() -> argparse.Namespace:
             "explain",
             "pytest",
             "auditoria",
+            "tdt",
         ],
         help="La tarea a realizar",
         required=True,
