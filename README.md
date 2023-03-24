@@ -280,11 +280,11 @@ Usamos [SemVer](http://semver.org/) para el versionado. Para todas las versiones
 
 ## ✒️ Autores
 
-- **Ferney Córdoba Canchala** - *Trabajo Inicial* - [fecork](https://github.com/fecork)
+- **Ferney Córdoba Canchala** - *Trabajo Inicial* - [github](https://github.com/fecork) [Linkedin](https://www.linkedin.com/in/wilberth-ferney-c%C3%B3rdoba-canchala-9734b74b/)
 
 ## 📄 Licencia
 
-Este proyecto está bajo la Licencia (Tu Licencia) - mira el archivo [LICENSE.md](notion://www.notion.so/fecork/LICENSE.md) para detalles
+Este proyecto está bajo la Licencia GNU - mira el archivo [LICENSE.md](notion://www.notion.so/fecork/LICENSE.md) para detalles
 
 ## 🎁 Expresiones de Gratitud
 
