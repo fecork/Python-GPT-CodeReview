@@ -6,7 +6,6 @@ def validate_args(code, error, new_code):
 
 
 def build_prompt(code: str, error: str, new_code: str, tasks) -> dict:
-    print(code, error, new_code)
     code, error, new_code = validate_args(code, error, new_code)
     task_data = {
         "best": {

@@ -25,9 +25,6 @@ def save_code(path, name, code):
 
     make_folders(path)
 
-    # carpeta = Path(folder)
-    # carpeta.mkdir(exist_ok=True)
-
     try:
         with codecs.open(f"{path}/{name}.py", "w", "utf-8") as file:
             file.write(code)

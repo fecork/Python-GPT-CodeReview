@@ -51,7 +51,7 @@ open_ai_tasks:
 
   best_practices: |
     eres un experto en buenas prácticas de python
-    menciona cinco (5) malas prácticas en el código
+    menciona cinco (3) malas prácticas en el código
     de acuerdo al PEP, o errores por no aprovechar 
     las caracteristicas de Python o no cumplir
     las 20 reglas del Zen de Python: 
@@ -62,7 +62,7 @@ open_ai_tasks:
     [E]Error: dar una descripción
     [S]Sugerencia: dar un consejo o tip
 
-    2. ... hasta 5
+    2. ... hasta 3
 
   improve: |
     eres un experto en desarrollo con python mejora este código para:
@@ -78,7 +78,9 @@ open_ai_tasks:
       utiliza diccionarios siempre
       Usar listas por comprensión en lugar de bucles for
       Usar generadores en lugar de listas cuando se trabaja con secuencias muy grandes
-      Documentar el código con docstrings y especificando el tipo de retorno
+      Documentar el código con docstrings
+      Especificando  el tipo de retorno con ->
+      Especificar los argumentos
       manejar las excepciones con bloques try-except-finally
       Utilizar funciones integradas de Python
       aprovecha las caracteristicas de Python

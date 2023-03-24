@@ -5,19 +5,21 @@ from domain.services.load_args import get_args
 from domain.entity.dto_promt import build_prompt
 
 import os
-from tqdm import tqdm
-
 from rich import console
 
 
 args = get_args()
 path = args.path
+root_path = os.path.dirname(path)
+
 name = os.path.basename(path)
 task = args.task
 new_code = args.new
 
-error = load_code(f"review/best/best_{name}")
+error = load_code(f"{root_path}/review/best/best_{name}")
 code = load_code(path)
+
+# como seleccionar el path sin el base name
 
 loaded_parameters = load_parameters()
 parameters = loaded_parameters["open_ai_parameters_change"]
@@ -31,7 +33,7 @@ gpt_response = adapter_azure_gpt.ask_openai(task_data["prompt"])
 response = gpt_response["text"]
 name = f"{task_data['nick']}{name}".replace(".py", "")
 
-save_code(f"{task_data['folder']}/{task}", name, response)
+save_code(f"{root_path}/{task_data['folder']}/{task}", name, response)
 console = console.Console()
 colores = ["orange3", "light_salmon3", "light_pink3", "pink3", "plum3"]
-console.print(response, style=colores[0])
+console.print(response, style=colores[4])
