@@ -30,6 +30,32 @@ Esto clonará el repositorio en tu máquina local.
 - python-dotenv
 - rich
 
+Para configurar las variables de entorno en el archivo `.env`, sigue estos pasos:
+
+1. Crea un archivo llamado `.env` en la raíz del proyecto.
+2. Abre el archivo `.env` en un editor de texto.
+3. Agrega las variables de entorno necesarias en el formato `VARIABLE=valor`.
+4. Guarda el archivo `.env`.
+
+A continuación, se describen las variables de entorno utilizadas en el proyecto:
+
+- `AZOPENAIKEY`: Clave de API de OpenAI para acceder a la API de GPT.
+- `AZOPENAIENDPOINT`: Punto final de la API de OpenAI para acceder a la API de GPT.
+- `AZOPENAITYPE`: Tipo de modelo de GPT a utilizar (p. ej., `davinci`).
+- `AZOPENAIVERSION`: Versión de GPT a utilizar (p. ej., `2020-05-03`). Si no se especifica, se utilizará la versión más reciente.
+- `RETRYATTEMPTS`: Número de intentos de reintentar la conexión si falla.
+
+Por ejemplo:
+
+```
+AZOPENAIKEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+AZOPENAIENDPOINT=https://api.openai.com/v1
+AZOPENAITYPE=davinci
+
+```
+
+## repositorio
+
 ### 🔧 Instalación
 
 1. Clonar el repositorio
